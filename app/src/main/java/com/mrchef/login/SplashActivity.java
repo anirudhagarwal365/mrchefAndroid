@@ -1,45 +1,51 @@
 package com.mrchef.login;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 
+import com.daimajia.androidanimations.library.Techniques;
 import com.mrchef.R;
+import com.viksaa.sssplash.lib.activity.AwesomeSplash;
+import com.viksaa.sssplash.lib.cnst.Flags;
+import com.viksaa.sssplash.lib.model.ConfigSplash;
 
 
-public class SplashActivity extends ActionBarActivity {
+public class SplashActivity extends AwesomeSplash {
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public void initSplash(ConfigSplash configSplash) {
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //Customize Circular Reveal
+        configSplash.setBackgroundColor(R.color.primary);
+        configSplash.setAnimCircularRevealDuration(2000);
+        configSplash.setRevealFlagX(Flags.REVEAL_RIGHT);
+        configSplash.setRevealFlagY(Flags.REVEAL_BOTTOM);
+
+        //Customize Logo
+        configSplash.setLogoSplash(R.drawable.cheff_ori);
+        configSplash.setAnimLogoSplashDuration(2000);
+        configSplash.setAnimLogoSplashTechnique(Techniques.BounceInDown);
 
 
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
+        //Customize Title
+        configSplash.setTitleSplash("My Awesome App");
+        configSplash.setTitleTextColor(R.color.primary);
+        configSplash.setTitleTextSize(30f);
+        configSplash.setAnimTitleDuration(3000);
+        configSplash.setAnimTitleTechnique(Techniques.FlipInX);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    public void animationsFinished() {
+      startActivity(new Intent(this, LoginActivity.class));
     }
 }
