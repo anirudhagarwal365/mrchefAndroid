@@ -3,9 +3,9 @@
   <component name="EclipseCodeFormatter">
     <option name="defaultSettings" value="true" />
     <option name="formatter" value="ECLIPSE" />
-    <option name="id" value="1489064763308" />
+    <option name="id" value="1482920255787" />
     <option name="name" value="default" />
-    <option name="pathToConfigFileJava" value="$PROJECT_DIR$/../blibli_profile_code_formatter_updated (1).xml" />
+    <option name="pathToConfigFileJava" value="$USER_HOME$/Downloads/blibli_profile_code_formatter_updated.xml" />
     <option name="selectedJavaProfile" value="BliBli Code Formatter Profile" />
   </component>
   <component name="EntryPointsManager">
@@ -45,7 +45,7 @@
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="true" assert-keyword="true" jdk-15="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="true" assert-keyword="true" jdk-15="true" project-jdk-name="1.8 (2)" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
