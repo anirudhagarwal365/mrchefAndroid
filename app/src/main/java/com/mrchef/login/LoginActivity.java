@@ -92,8 +92,6 @@ public class LoginActivity extends AppCompatActivity {
     // return;
     // }
 
-    _loginButton.setEnabled(false);
-
     final ProgressDialog progressDialog =
         new ProgressDialog(LoginActivity.this, R.style.AppTheme_Dark_Dialog);
     progressDialog.setIndeterminate(true);
@@ -110,6 +108,9 @@ public class LoginActivity extends AppCompatActivity {
       @Override
       public void onResponse(Call<Boolean> call, Response<Boolean> response) {
         progressDialog.dismiss();
+        _emailText.setText("");
+        _passwordText.setText("");
+        editTextDoj.setText("");
         startActivity(new Intent(LoginActivity.this, FoodSelectionActivity.class));
       }
 
