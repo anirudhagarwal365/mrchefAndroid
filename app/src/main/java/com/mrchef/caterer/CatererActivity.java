@@ -37,6 +37,8 @@ public class CatererActivity extends AppCompatActivity {
   private ActivityCaterorBinding activityCaterorBinding;
   private String[] foodTypes = {"Select Food Type", "Main Course", "Desert", "Snacks"};
   private String foodType;
+  private String foodName;
+  private String foodImageUrl;
   private List<FoodItem> foodItemList = new ArrayList<>();
   private CateringFoodAdapter cateringFoodAdapter;
   private CustomProgressDialog customProgressDialog;
@@ -86,8 +88,13 @@ public class CatererActivity extends AppCompatActivity {
     activityCaterorBinding.btAdd.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        foodItemList.add(0, new FoodItem(activityCaterorBinding.inputFoodName.getText().toString(),
-            activityCaterorBinding.inputFoodImage.getText().toString(), foodType, 5));
+        foodName = activityCaterorBinding.inputFoodName.getText().toString();
+        foodImageUrl = activityCaterorBinding.inputFoodImage.getText().toString();
+        foodType = foodTypes[ activityCaterorBinding.spinner.getSelectedItemPosition()];
+        foodItemList.add(0, new FoodItem(foodName, foodImageUrl, foodType, 5));
+        activityCaterorBinding.inputFoodName.setText("");
+        activityCaterorBinding.inputFoodImage.setText("");
+        activityCaterorBinding.spinner.setSelection(0);
         showListItem();
       }
     });
@@ -99,7 +106,7 @@ public class CatererActivity extends AppCompatActivity {
       cateringFoodAdapter = new CateringFoodAdapter(foodItemList);
       activityCaterorBinding.rvFoodList.setAdapter(cateringFoodAdapter);
     } else {
-      cateringFoodAdapter.notifyItemInserted(cateringFoodAdapter.getItemCount());
+      cateringFoodAdapter.notifyDataSetChanged();
     }
   }
 
