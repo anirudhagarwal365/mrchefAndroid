@@ -41,7 +41,8 @@ public class FoodListingAdapter
     final MenuItem foodMenu = foodMenuList.get(position);
     holder.itemFoodListBinding.tvFoodName.setText(foodMenu.getName());
     holder.itemFoodListBinding.tvFoodType.setText(foodMenu.getItemType());
-    Glide.with(context).load(foodMenu.getImageUrl()).into(holder.itemFoodListBinding.ivFood);
+    Glide.with(context).load(foodMenu.getImageUrl()).placeholder(R.mipmap.ic_launcher)
+        .into(holder.itemFoodListBinding.ivFood);
     holder.itemFoodListBinding.cbYes.setChecked(foodMenu.isSelected());
     holder.itemFoodListBinding.cbYes.setOnClickListener(new View.OnClickListener() {
       @Override
