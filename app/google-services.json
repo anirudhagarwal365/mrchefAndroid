@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "303982675996",
+    "firebase_url": "https://mrchef-b7695.firebaseio.com",
+    "project_id": "mrchef-b7695",
+    "storage_bucket": "mrchef-b7695.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:303982675996:android:9072c734b5114439",
+        "android_client_info": {
+          "package_name": "com.mrchef"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "303982675996-4h4kpuck7bslh43442kvhfm5t4rtdhq1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD70wewCuxIqDknIlHDcI7_gMWSyTQGuXM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
