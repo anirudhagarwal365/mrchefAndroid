@@ -1,9 +1,12 @@
 package com.mrchef.network;
 
+import com.mrchef.login.User;
 import com.mrchef.model.consumption_model.FoodConsumptionDetail;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 /**
@@ -12,6 +15,6 @@ import retrofit2.http.Path;
 
 public interface IMrChefApi {
   // just an demo api do not use it
-  @GET("users/{user}/repos")
-  Call<FoodConsumptionDetail> listRepos(@Path("user") String user);
+  @PUT("addUser")
+  Call<Boolean> loginRequest(@Body User user);
 }

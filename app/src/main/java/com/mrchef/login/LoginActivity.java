@@ -13,9 +13,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mrchef.R;
+import com.mrchef.food_detail.FoodSelectionActivity;
+import com.mrchef.network.IMrChefApi;
+import com.mrchef.network.NetworkUtils;
 
 import butterknife.ButterKnife;
 import butterknife.Bind;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class LoginActivity extends AppCompatActivity {
   private static final String TAG = "LoginActivity";
@@ -29,6 +36,8 @@ public class LoginActivity extends AppCompatActivity {
   Button _loginButton;
   @Bind(R.id.link_signup)
   TextView _signupLink;
+  @Bind(R.id.input_doj)
+  EditText editTextDoj;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -60,10 +69,10 @@ public class LoginActivity extends AppCompatActivity {
   public void login() {
     Log.d(TAG, "Login");
 
-    if (!validate()) {
-      onLoginFailed();
-      return;
-    }
+//    if (!validate()) {
+//      onLoginFailed();
+//      return;
+//    }
 
     _loginButton.setEnabled(false);
 
@@ -73,19 +82,25 @@ public class LoginActivity extends AppCompatActivity {
     progressDialog.setMessage("Authenticating...");
     progressDialog.show();
 
-    String email = _emailText.getText().toString();
-    String password = _passwordText.getText().toString();
+    String employeeId = _emailText.getText().toString();
+    String name = _passwordText.getText().toString();
+    String doj = editTextDoj.getText().toString();
 
-    // TODO: Implement your own authentication logic here.
-
-    new android.os.Handler().postDelayed(new Runnable() {
-      public void run() {
-        // On complete call either onLoginSuccess or onLoginFailed
-        onLoginSuccess();
-        // onLoginFailed();
+    IMrChefApi iMrChefApi = NetworkUtils.getClient().create(IMrChefApi.class);
+    Call<Boolean> booleanCall =
+        iMrChefApi.loginRequest(new User("Ganna420", "Ganna", "20-01-2010"));
+    booleanCall.enqueue(new Callback<Boolean>() {
+      @Override
+      public void onResponse(Call<Boolean> call, Response<Boolean> response) {
         progressDialog.dismiss();
+        startActivity(new Intent(LoginActivity.this, FoodSelectionActivity.class));
       }
-    }, 3000);
+
+      @Override
+      public void onFailure(Call<Boolean> call, Throwable t) {
+        // no
+      }
+    });
   }
 
 
