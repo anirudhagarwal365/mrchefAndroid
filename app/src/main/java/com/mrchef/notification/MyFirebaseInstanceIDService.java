@@ -1,4 +1,4 @@
-package com.mrchef;
+package com.mrchef.notification;
 
 import android.app.Service;
 import android.content.Intent;

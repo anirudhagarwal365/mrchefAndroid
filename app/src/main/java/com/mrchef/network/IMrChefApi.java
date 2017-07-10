@@ -1,5 +1,6 @@
 package com.mrchef.network;
 
+import com.mrchef.caterer.CatererDetailsAndMenu;
 import com.mrchef.login.User;
 import com.mrchef.model.consumption_model.UserMenuReport;
 
@@ -21,4 +22,7 @@ public interface IMrChefApi {
 
     @GET("reportsByDate")
     Call<UserMenuReport> reportsByDate(@Query("date") String date);
+
+  @PUT("addItems")
+  Call<Boolean> addFoodItems(@Body CatererDetailsAndMenu catererDetailsAndMenu);
 }

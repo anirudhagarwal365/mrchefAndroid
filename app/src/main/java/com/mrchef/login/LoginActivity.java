@@ -92,8 +92,6 @@ public class LoginActivity extends AppCompatActivity {
     // return;
     // }
 
-    _loginButton.setEnabled(false);
-
     final ProgressDialog progressDialog =
         new ProgressDialog(LoginActivity.this, R.style.AppTheme_Dark_Dialog);
     progressDialog.setIndeterminate(true);
@@ -110,6 +108,9 @@ public class LoginActivity extends AppCompatActivity {
       @Override
       public void onResponse(Call<Boolean> call, Response<Boolean> response) {
         progressDialog.dismiss();
+        _emailText.setText("");
+        _passwordText.setText("");
+        editTextDoj.setText("");
         startActivity(new Intent(LoginActivity.this, FoodSelectionActivity.class));
       }
 
@@ -199,8 +200,8 @@ public class LoginActivity extends AppCompatActivity {
   }
 
   private void updateLabel(Calendar myCalendar) {
-    String myFormat = "dd-mm-yyyy"; // In which you need put here
-    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+    String myFormat = "dd-MM-YYYY"; // In which you need put here
+    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
     editTextDoj.setText(sdf.format(myCalendar.getTime()));
   }
 }

@@ -19,6 +19,9 @@ public class CateringFoodAdapter
     extends RecyclerView.Adapter<CateringFoodAdapter.FoodItemViewHolder> {
   private List<FoodItem> foodItemList;
 
+  public CateringFoodAdapter(List<FoodItem> foodItemList) {
+    this.foodItemList = foodItemList;
+  }
 
   @Override
   public FoodItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -29,8 +32,10 @@ public class CateringFoodAdapter
 
   @Override
   public void onBindViewHolder(final FoodItemViewHolder holder, int position) {
-    holder.itemCateringFoodBinding.tvFoodName.setText(foodItemList.get(position).getName());
-    holder.itemCateringFoodBinding.tvFoodName.setText(foodItemList.get(position).getItemType());
+    holder.itemCateringFoodBinding.tvFoodName
+        .setText("Food Name : " + foodItemList.get(position).getName());
+    holder.itemCateringFoodBinding.tvFoodType
+        .setText("Food Type : " + foodItemList.get(position).getItemType());
     holder.itemCateringFoodBinding.ibCancel.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {

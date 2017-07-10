@@ -16,8 +16,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
+            android:layout_marginRight="-16dp"
             android:background="@android:color/transparent"
-            android:text="Vendor Page" />
+            android:text="Vendor" />
 
         <ImageView
             android:layout_width="wrap_content"
