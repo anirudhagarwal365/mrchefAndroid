@@ -13,6 +13,9 @@ import android.view.ViewGroup;
 
 import com.mrchef.R;
 import com.mrchef.databinding.ItemFoodListBinding;
+import com.mrchef.food_detail.FoodSelectionActivity;
+import com.mrchef.food_detail.models.FoodItem;
+import com.mrchef.food_detail.models.UserMenuItem;
 import com.mrchef.model.food_listing_model.MenuItem;
 
 /**
@@ -21,12 +24,12 @@ import com.mrchef.model.food_listing_model.MenuItem;
 
 public class FoodListingAdapter
     extends RecyclerView.Adapter<FoodListingAdapter.FoodListingViewHolder> {
-  private final Context context;
-  private List<MenuItem> foodMenuList;
+  private FoodSelectionActivity foodSelectionActivity;
+  private List<FoodItem> foodItemList;
 
-  public FoodListingAdapter(List<MenuItem> foodMenuList, Context context) {
-    this.foodMenuList = foodMenuList;
-    this.context = context;
+  public FoodListingAdapter(List<FoodItem> foodItemList, FoodSelectionActivity foodSelectionActivity) {
+    this.foodItemList = foodItemList;
+    this.foodSelectionActivity = foodSelectionActivity;
   }
 
   @Override
@@ -38,19 +41,26 @@ public class FoodListingAdapter
 
   @Override
   public void onBindViewHolder(final FoodListingViewHolder holder, int position) {
-    final MenuItem foodMenu = foodMenuList.get(position);
-    holder.itemFoodListBinding.tvFoodName.setText(foodMenu.getName());
-    holder.itemFoodListBinding.tvFoodType.setText(foodMenu.getItemType());
-    Glide.with(context).load(foodMenu.getImageUrl()).into(holder.itemFoodListBinding.ivFood);
-    holder.itemFoodListBinding.cbYes.setChecked(foodMenu.isSelected());
+    final FoodItem foodItem = foodItemList.get(position);
+    holder.itemFoodListBinding.tvFoodName.setText(foodItem.getName());
+    holder.itemFoodListBinding.tvFoodType.setText(foodItem.getItemType());
+    Glide.with(foodSelectionActivity).load(foodItem.getImageUrl()).placeholder(R.mipmap.ic_launcher)
+            .into(holder.itemFoodListBinding.ivFood);
+    holder.itemFoodListBinding.ratingBar.setRating(foodItem.getRating());
     holder.itemFoodListBinding.cbYes.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         if (holder.itemFoodListBinding.cbYes.isChecked()) {
-          foodMenuList.get(holder.getAdapterPosition()).setSelected(true);
+          UserMenuItem userMenuItem = new UserMenuItem();
+          userMenuItem.consuming = true;
+          userMenuItem.setFoodId(foodItem.getId());
+          foodSelectionActivity.userMenuItemList.add(userMenuItem);
         } else {
-          foodMenuList.get(holder.getAdapterPosition()).setSelected(false);
-
+          UserMenuItem userMenuItem = new UserMenuItem();
+          userMenuItem.setFoodId(foodItem.getId());
+          if (foodSelectionActivity.userMenuItemList.contains(userMenuItem)) {
+            foodSelectionActivity.userMenuItemList.remove(userMenuItem);
+          }
         }
       }
     });
@@ -58,7 +68,7 @@ public class FoodListingAdapter
 
   @Override
   public int getItemCount() {
-    return foodMenuList.size();
+    return foodItemList.size();
   }
 
   class FoodListingViewHolder extends RecyclerView.ViewHolder {

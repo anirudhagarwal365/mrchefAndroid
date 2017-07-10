@@ -137,7 +137,7 @@ public class CatererActivity extends AppCompatActivity {
   private void submitAddedFoodItems() {
     IMrChefApi iMrChefApi = NetworkUtils.getClient().create(IMrChefApi.class);
     Call<Boolean> booleanCall = iMrChefApi.addFoodItems(
-        new CatererDetailsAndMenu(activityCaterorBinding.inputVendorName.getText().toString(),
+        new CatererDetailsAndMenuForCaterer(activityCaterorBinding.inputVendorName.getText().toString(),
             activityCaterorBinding.inputDate.getText().toString(), foodItemList));
     booleanCall.enqueue(new Callback<Boolean>() {
       @Override

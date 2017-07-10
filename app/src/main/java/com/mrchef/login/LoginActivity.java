@@ -108,10 +108,14 @@ public class LoginActivity extends AppCompatActivity {
       @Override
       public void onResponse(Call<Boolean> call, Response<Boolean> response) {
         progressDialog.dismiss();
+        Intent intent = new Intent(LoginActivity.this, FoodSelectionActivity.class);
+        intent.putExtra("empId", _emailText.getText().toString());
+        intent.putExtra("doj", editTextDoj.getText().toString());
+        intent.putExtra("name", _passwordText.getText().toString());
         _emailText.setText("");
         _passwordText.setText("");
         editTextDoj.setText("");
-        startActivity(new Intent(LoginActivity.this, FoodSelectionActivity.class));
+        startActivity(intent);
       }
 
       @Override
@@ -200,7 +204,7 @@ public class LoginActivity extends AppCompatActivity {
   }
 
   private void updateLabel(Calendar myCalendar) {
-    String myFormat = "dd-MM-YYYY"; // In which you need put here
+    String myFormat = "dd-MM-yyyy"; // In which you need put here
     SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
     editTextDoj.setText(sdf.format(myCalendar.getTime()));
   }
