@@ -22,7 +22,6 @@
         <activity
             android:name=".login.SignupActivity"
             android:theme="@style/AppTheme.Dark" />
-
         <activity
             android:name=".food_detail.FoodSelectionActivity"
             android:theme="@style/AppTheme.Dark" />
@@ -30,12 +29,12 @@
             android:name=".food_detail.FoodConsumptionDetailActivity"
             android:theme="@style/AppTheme.Dark" />
 
-        <service android:name=".MyFirebaseInstanceIDService">
+        <service android:name=".notification.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".MyFirebaseMessagingService">
+        <service android:name=".notification.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
@@ -43,6 +42,9 @@
 
         <activity
             android:name=".caterer.CatererActivity"
+            android:theme="@style/AppTheme.Dark" />
+        <activity
+            android:name=".thankyou.ThankYouActivity"
             android:theme="@style/AppTheme.Dark" />
     </application>
 

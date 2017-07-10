@@ -199,8 +199,8 @@ public class LoginActivity extends AppCompatActivity {
   }
 
   private void updateLabel(Calendar myCalendar) {
-    String myFormat = "dd-mm-yyyy"; // In which you need put here
-    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+    String myFormat = "dd-MM-YYYY"; // In which you need put here
+    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.ENGLISH);
     editTextDoj.setText(sdf.format(myCalendar.getTime()));
   }
 }

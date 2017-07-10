@@ -1,5 +1,6 @@
 package com.mrchef.network;
 
+import com.mrchef.caterer.CatererDetailsAndMenu;
 import com.mrchef.login.User;
 import com.mrchef.model.consumption_model.FoodConsumptionDetail;
 
@@ -17,4 +18,7 @@ public interface IMrChefApi {
   // just an demo api do not use it
   @PUT("addUser")
   Call<Boolean> loginRequest(@Body User user);
+
+  @PUT("addItems")
+  Call<Boolean> addFoodItems(@Body CatererDetailsAndMenu catererDetailsAndMenu);
 }
