@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.mrchef.R;
 import com.mrchef.databinding.ActivityThankYouBinding;
+import com.mrchef.login.LoginActivity;
 import com.mrchef.model.consumption_model.FoodConsumptionDetail;
 
 public class ThankYouActivity extends AppCompatActivity {
@@ -28,5 +29,20 @@ public class ThankYouActivity extends AppCompatActivity {
         startActivity(new Intent(ThankYouActivity.this, FoodConsumptionDetail.class));
       }
     });
+    activityThankYouBinding.toolbar.myToolbar
+        .setNavigationOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+            onBackPressed();
+          }
+        });
+  }
+
+  @Override
+  public void onBackPressed() {
+    Intent intent = new Intent(this, LoginActivity.class);
+    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    startActivity(intent);
+    super.onBackPressed();
   }
 }
