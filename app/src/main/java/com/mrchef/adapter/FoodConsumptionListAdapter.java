@@ -5,7 +5,8 @@ import java.util.List;
 import com.bumptech.glide.Glide;
 import com.mrchef.R;
 import com.mrchef.databinding.ItemConsumptionDetailBinding;
-import com.mrchef.model.consumption_model.MenuItem;
+import com.mrchef.model.consumption_model.UserFoodItemReport;
+import com.mrchef.model.consumption_model.UserFoodItemReport;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
@@ -21,9 +22,9 @@ import android.view.ViewGroup;
 public class FoodConsumptionListAdapter
     extends RecyclerView.Adapter<FoodConsumptionListAdapter.FoodConsumptionViewHolder> {
   private final Context context;
-  private List<MenuItem> menuItemList;
+  private List<UserFoodItemReport> menuItemList;
 
-  public FoodConsumptionListAdapter(List<MenuItem> menuItemList, Context context) {
+  public FoodConsumptionListAdapter(List<UserFoodItemReport> menuItemList, Context context) {
     this.menuItemList = menuItemList;
     this.context = context;
   }
@@ -37,13 +38,14 @@ public class FoodConsumptionListAdapter
 
   @Override
   public void onBindViewHolder(FoodConsumptionViewHolder holder, int position) {
-    final MenuItem menuItem = menuItemList.get(position);
+    final UserFoodItemReport menuItem = menuItemList.get(position);
     holder.itemConsumptionDetailBinding.tvFoodName.setText(menuItem.getName());
     holder.itemConsumptionDetailBinding.tvFoodType.setText(menuItem.getItemType());
     holder.itemConsumptionDetailBinding.tvNumberOfPeople
         .setText(String.valueOf(menuItem.getCount()));
     Glide.with(context).load(menuItem.getImageUrl())
         .into(holder.itemConsumptionDetailBinding.ivFood);
+    holder.itemConsumptionDetailBinding.rbStar.setRating(menuItem.getRating());
   }
 
   @Override
