@@ -1,5 +1,6 @@
 package com.mrchef.login;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,14 +9,20 @@ import android.util.Log;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mrchef.R;
+import com.mrchef.caterer.CatererActivity;
 import com.mrchef.food_detail.FoodSelectionActivity;
 import com.mrchef.network.IMrChefApi;
 import com.mrchef.network.NetworkUtils;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 import butterknife.ButterKnife;
 import butterknife.Bind;
@@ -38,6 +45,8 @@ public class LoginActivity extends AppCompatActivity {
   TextView _signupLink;
   @Bind(R.id.input_doj)
   EditText editTextDoj;
+  @Bind(R.id.bt_vendor)
+  Button buttonVendor;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -64,15 +73,24 @@ public class LoginActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
       }
     });
+
+    buttonVendor.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        startActivity(new Intent(LoginActivity.this, CatererActivity.class));
+      }
+    });
+
+    fetchDOJDate();
   }
 
   public void login() {
     Log.d(TAG, "Login");
 
-//    if (!validate()) {
-//      onLoginFailed();
-//      return;
-//    }
+    // if (!validate()) {
+    // onLoginFailed();
+    // return;
+    // }
 
     _loginButton.setEnabled(false);
 
@@ -84,11 +102,10 @@ public class LoginActivity extends AppCompatActivity {
 
     String employeeId = _emailText.getText().toString();
     String name = _passwordText.getText().toString();
-    String doj = editTextDoj.getText().toString();
 
     IMrChefApi iMrChefApi = NetworkUtils.getClient().create(IMrChefApi.class);
     Call<Boolean> booleanCall =
-        iMrChefApi.loginRequest(new User("Ganna420", "Ganna", "20-01-2010"));
+        iMrChefApi.loginRequest(new User(employeeId, name, editTextDoj.getText().toString()));
     booleanCall.enqueue(new Callback<Boolean>() {
       @Override
       public void onResponse(Call<Boolean> call, Response<Boolean> response) {
@@ -98,7 +115,7 @@ public class LoginActivity extends AppCompatActivity {
 
       @Override
       public void onFailure(Call<Boolean> call, Throwable t) {
-        // no
+        // no implementation required
       }
     });
   }
@@ -154,5 +171,36 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     return valid;
+  }
+
+  private void fetchDOJDate() {
+    final Calendar myCalendar = Calendar.getInstance();
+
+    final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+      @Override
+      public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+        myCalendar.set(Calendar.YEAR, year);
+        myCalendar.set(Calendar.MONTH, monthOfYear);
+        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        updateLabel(myCalendar);
+      }
+
+    };
+
+    editTextDoj.setOnClickListener(new View.OnClickListener() {
+
+      @Override
+      public void onClick(View view) {
+        new DatePickerDialog(LoginActivity.this, date, myCalendar.get(Calendar.YEAR),
+            myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+      }
+    });
+  }
+
+  private void updateLabel(Calendar myCalendar) {
+    String myFormat = "dd-mm-yyyy"; // In which you need put here
+    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+    editTextDoj.setText(sdf.format(myCalendar.getTime()));
   }
 }

@@ -39,7 +39,7 @@ public class FoodSelectionActivity extends AppCompatActivity {
         DataBindingUtil.setContentView(this, R.layout.activity_food_selection);
     customProgressDialog = new CustomProgressDialog(this, 0, true);
     customProgressDialog.show();
-    callApi();
+    // callApi();
   }
 
   private void callApi() {
