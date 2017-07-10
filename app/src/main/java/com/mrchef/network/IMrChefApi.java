@@ -26,4 +26,7 @@ public interface IMrChefApi {
 
   @GET("/submit/menu")
   Call<Boolean> submitMenu(@Body SubmitMenuDetail submitMenuDetail);
+
+  @PUT("addItems")
+  Call<Boolean> addFoodItems(@Body CatererDetailsAndMenu catererDetailsAndMenu);
 }

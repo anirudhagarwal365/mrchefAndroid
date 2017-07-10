@@ -18,5 +18,4 @@ public class CatererDetailsAndMenu {
     this.foodItems = foodItems;
   }
 
-
 }
